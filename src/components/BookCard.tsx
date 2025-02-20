@@ -4,7 +4,6 @@ import { Book } from '../types/book';
 
 interface BookCardProps {
   book: Book;
-  onAddToCart?: (bookId: string) => void;
 }
 
 export const BookCard: React.FC<BookCardProps> = ({ book}) => {

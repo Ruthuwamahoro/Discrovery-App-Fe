@@ -11,6 +11,7 @@ import { getAllBooksAvailable, setFilters, resetFilters } from '../redux/slices/
 import { FilterOptions } from '../types/book';
 import { useDebounce } from '../redux/hooks/useDebounce';
 import { BookCard } from './BookCard';
+import BookCardSkeleton from './BookCardSkeleton';
 
 const BookDisplay: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -83,34 +84,35 @@ const BookDisplay: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                   <div className="flex justify-between items-center mb-8">
                       <div>
-                          <h1 className="text-3xl font-bold text-gray-900">Book Collection</h1>
+                          <h1 className="text-3xl font-bold text-gray-900">Book Discovery App</h1>
                           <p className="mt-1 text-sm text-gray-500">
                               Welcome back, ruth
                           </p>
                       </div>
-                      <button
-                          onClick={() => setIsFilterOpen(!isFilterOpen)}
-                          className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                      >
-                          <FunnelIcon className="h-5 w-5 mr-2 text-gray-400" />
-                          Filters
-                      </button>
+                      <div className='flex'>
+                        <div className="relative mr-10">
+                                <input
+                                    type="text"
+                                    placeholder="Search books..."
+                                    value={searchInput}
+                                    onChange={handleSearchChange}
+                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                />
+                                <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                        </div>
+                        <button
+                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                            className="inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-50 hover:text-gray-900"
+                        >
+                            <FunnelIcon className="h-5 w-5 mr-2 text-white font-bold hover:text-gray-500" />
+                            Filters
+                        </button>
+                      </div>
                   </div>
 
                   <div className={`bg-white rounded-xl shadow-sm mb-8 transition-all duration-300 ${isFilterOpen ? 'max-h-96' : 'max-h-0 overflow-hidden'}`}>
-                      <div className="p-6">
+                      <div className="p-6 flex justify-between">
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                              <div className="relative">
-                                  <input
-                                      type="text"
-                                      placeholder="Search books..."
-                                      value={searchInput}
-                                      onChange={handleSearchChange}
-                                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                  />
-                                  <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                              </div>
-
                               <select
                                   value={filters.genre || ''}
                                   onChange={(e) => handleFilterChange('genre', e.target.value)}
@@ -155,8 +157,15 @@ const BookDisplay: React.FC = () => {
                   </div>
 
                   {loading ? (
-                      <div className="flex justify-center items-center py-12">
-                          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+                      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
+                        <BookCardSkeleton/>
                       </div>
                   ) : (
                       renderContent()

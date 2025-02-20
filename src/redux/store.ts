@@ -1,13 +1,10 @@
-// store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import bookReducer from "./slices/bookSlice";
-// import authReducer from './slices/authSlice';
 
 
 export const store = configureStore({
     reducer: {
         book: bookReducer,
-        // auth: authReducer,
     }
 });
 
