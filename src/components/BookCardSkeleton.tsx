@@ -1,11 +1,7 @@
-import React from 'react';
-
 const BookCardSkeleton = () => {
   return (
     <div className="group relative bg-white rounded-xl shadow-lg">
-      {/* Image skeleton */}
       <div className="aspect-[3/4] relative overflow-hidden rounded-t-xl bg-gray-200 animate-pulse">
-        {/* Rating skeleton */}
         <div className="absolute top-2 right-2 bg-white/90 px-2 py-1 rounded-lg flex items-center gap-1">
           <div className="h-4 w-4 bg-gray-300 rounded animate-pulse" />
           <div className="h-4 w-6 bg-gray-300 rounded animate-pulse" />
